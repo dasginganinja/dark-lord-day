@@ -25,7 +25,22 @@
     ],
     "background": {
     	"scripts": [
-    		"background.js"
+    		"js/background.js"
 		]
-    }
+    },
+    "content_scripts": [
+    	{
+    		"matches": [
+    			"http://*.etix.com",
+    			"https://*.etix.com"
+			],
+			"css": [
+				"css/content_scripts.css"
+			],
+			"js": [
+				"js/jquery.min.js",
+				"js/content_scripts.js"
+			]
+    	}
+    ]
 }
