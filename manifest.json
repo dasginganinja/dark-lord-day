@@ -35,11 +35,11 @@
     			"https://*.etix.com"
 			],
 			"css": [
-				"css/content_scripts.css"
+				"css/content_script.css"
 			],
 			"js": [
 				"js/jquery.min.js",
-				"js/content_scripts.js"
+				"js/content_script.js"
 			]
     	}
     ]
