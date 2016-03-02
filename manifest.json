@@ -13,6 +13,7 @@
     "permissions": [
     	"activeTab",
     	"http://*.etix.com/",
+    	"https://*.etix.com/",
     	"tabs",
     	"background",
     	"browsingData",
