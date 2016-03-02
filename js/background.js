@@ -3,3 +3,4 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     code: 'document.body.style.backgroundColor="red"'
   });
 });
+// http://stackoverflow.com/questions/12065029/chrome-redirect-extension

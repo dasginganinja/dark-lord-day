@@ -12,8 +12,7 @@
     },
     "permissions": [
     	"activeTab",
-    	"http://*.etix.com/",
-    	"https://*.etix.com/",
+        "*://*.etix.com/",
     	"tabs",
     	"background",
     	"browsingData",
@@ -31,14 +30,13 @@
     "content_scripts": [
     	{
     		"matches": [
-    			"http://*.etix.com",
-    			"https://*.etix.com"
+    			"*://*.etix.com/*"
 			],
 			"css": [
 				"css/content_script.css"
 			],
 			"js": [
-				"js/jquery.min.js",
+                "js/jquery.min.js",
 				"js/content_script.js"
 			]
     	}
