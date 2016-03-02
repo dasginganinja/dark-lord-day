@@ -1,0 +1,30 @@
+{
+	"manifest_version": 2,
+	"name": "Dark Lord Days ticket helper",
+	"version": "1.0.0",
+	"browser_action": {
+      "default_icon": {                    // optional
+        "19": "images/beer19.png",           // optional
+        "38": "images/beer38.png"            // optional
+      },
+      "default_title": "Dark Lord Days ticket helper",      // optional; shown in tooltip
+      "default_popup": "popup.html"        // optional
+    },
+    "permissions": [
+    	"activeTab",
+    	"http://*.etix.com/",
+    	"tabs",
+    	"background",
+    	"browsingData",
+    	"cookies",
+    	"notifications",
+    	"storage",
+    	"webNavigation",
+    	"webRequest"
+    ],
+    "background": {
+    	"scripts": [
+    		"background.js"
+		]
+    }
+}
