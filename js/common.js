@@ -39,23 +39,36 @@ function getPerformanceState() {
 }
 
 function dld_init() {
+	// Get ID from Query String
 	var paramid = getQueryParameterByName('performance_id');
-
+	if (paramid) {
+		state.performance_id = paramid;
+	}
 }
 
-function setTickets($element, num) {
-	if ($element == undefined) {
-		$element = jQuery('.price-level-row:first-child select');
-		if ($element == undefined || $element.length = 0) {
-			return 0;
-		}
+function setTickets($form, num) {
+	// Default values
+	if ($form == undefined) {
+		$form = jQuery('form[name="frmPickTicket"]');
 	}
 	if (num == undefined) {
 		num = 2;
 	}
-	if ($element.length) {
-		$element.val(num);
+
+	// Get the first ticket dropdown
+	$element = $form.find('.price-level-row:first-child select');
+
+	// Check to see we have an element to begin with
+	if ($element == undefined || $element.length == 0) {
+		return 0;
 	}
+
+	// Set the number of tickets
+	$element.val(num);
+
+	// Submit the form
+	$form.find('button[type="submit"]').trigger('click');
+	
 	return 1;
 }
 

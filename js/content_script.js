@@ -1,5 +1,5 @@
 // initialize the state of the script
-init();
+dld_init();
 
 function dld_bg() {
 	// Set the background
@@ -11,7 +11,7 @@ function dld_bg() {
 }
 
 // Actions to take for target performance
-if (performance_id != undefined && performance_id == config.performance_id_default) {
+if (state.performance_id != undefined && state.performance_id == config.performance_id_default) {
 	
 	// Enhanced Page Style
 	dld_bg();
@@ -23,6 +23,14 @@ if (performance_id != undefined && performance_id == config.performance_id_defau
 	// Presale URL: http://event.etix.com/ticket/online/performanceSale.do?performance_id=7745932&method=restoreToken
 	// Live URL: www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=4894601
 	
+
+	// Jay-Z RestoreToken URL: http://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=6503389
 }
 
 setTickets(undefined, 2);
+
+		$('body').append('<a id="cleartix">Remove all tix</a>');
+		$('#cleartix').click(function(e) {
+			e.preventDefault();
+			clearShoppingCart();
+		});
