@@ -39,6 +39,12 @@ if (state.performance_id != undefined && state.performance_id == config.performa
 
 	// Jay-Z RestoreToken URL: http://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=6503389
 
+    
+    // Switch to best available
+    // ?method=switchSelectionMethod&selection_method=byBest
+    
+    // Captcha check
+    // <table id="recaptcha_table" class="recaptchatable recaptcha_theme_red">
 
 	// Moody Blues Live URL
 	// https://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=2975795
