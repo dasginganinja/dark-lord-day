@@ -12,6 +12,9 @@ Currently this extension, once enabled and in buy mode, adds 2 tickets for the D
 	3.) Enable Developer Mode (checkbox in upper right hand)
 	6.) Drag the dark-lord-days-master folder into the Extensions tab to install extension.
 	7.) Extension is now installed.
+	8.) Navigate to the presale ticket page and watch it refresh. When it comes time for the event you'll notice tabs pop open and when one successfully goes to the cart the other tabs will close.
+	9.) Finish your reservation
+	10.) Good luck :)
 
 * The extension must be in buy mode in order for this to work *
 
