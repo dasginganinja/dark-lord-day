@@ -10,6 +10,14 @@ function dld_bg() {
 	});
 }
 
+function removeAllTix() {
+	$('body').append('<a id="cleartix">Remove all tix</a>');
+	$('#cleartix').click(function(e) {
+		e.preventDefault();
+		clearShoppingCart();
+	});
+}
+
 // Actions to take for target performance
 if (state.performance_id != undefined && state.performance_id == config.performance_id_default) {
 	
@@ -25,12 +33,9 @@ if (state.performance_id != undefined && state.performance_id == config.performa
 	
 
 	// Jay-Z RestoreToken URL: http://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=6503389
-}
 
-setTickets(undefined, 2);
 
-		$('body').append('<a id="cleartix">Remove all tix</a>');
-		$('#cleartix').click(function(e) {
-			e.preventDefault();
-			clearShoppingCart();
-		});
+	if (state.armed) {
+		setTickets();
+	}
+}		
