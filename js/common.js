@@ -204,7 +204,7 @@ function setupErrorListener() {
 
 
 // General idea is to loop and refresh tabs
-// When the tabs load and there is an error it will refresh the tab
+// DONE: When the tabs load and there is an error it will refresh the tab
 // When the tab detects that it is redirecting we should probably spawn 
 //    a few tabs or new windows with the sale page so that the
 //    automated ticket reservation can take over.
