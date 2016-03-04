@@ -289,7 +289,9 @@ console.log('5');
 
 function calculateTimeToEventMS() {
 	var now = new Date();
-	var event = new Date("March 5, 2016 12:00:00");
+	//var event = new Date("March 5, 2016 13:00:00"); // Dark Lord Days
+	var event = new Date("March 4, 2016 12:00:00");
+
 
 	return event - now;
 }
