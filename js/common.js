@@ -17,6 +17,8 @@ var methods = [
 
 ];
 
+var tab_interval = []; // Used to store the interval
+
 /* Getter/Setter Functions */
 
 function getExtensionUrl(path) {
@@ -38,7 +40,7 @@ function getPerformanceIDFromUrl() {
 	return undefined;
 }
 function getPerformanceIDFromMeta() {
-	//alert('danger will robinson');
+	// http://www.raymondcamden.com/2012/11/26/Reading-Microdata-Elements-in-Chrome/
 }
 
 function getPerformanceState() {
@@ -133,4 +135,37 @@ function getPresaleTicketUrl(performance_id) {
 	return "http://event.etix.com/ticket/online/performance_id=7745932&method=restoreToken
 	  + "performanceSale.do?method=restoreToken&performance_id=" 
 	  + performance_id;
+}
+
+function setupRequestListener() {
+	chrome.webRequest.onErrorOccurred.addListener(
+		function(details) {
+
+			// Error callback starts here
+			
+			// details.url
+
+			// details.tabId
+
+			// details.timeStamp
+
+			return {
+				redirectUrl: host + details.url.match(/^https?:\/\/[^\/]+([\S\s]*)/)[1]
+			};
+		},
+		{
+		    urls: [
+		        "*://www.etix.com/ticket/p/*",
+		        "*://event.etix.com/ticket/p/*",
+		        "*://www.etix.com/ticket/online/*"
+		        "*://event.etix.com/ticket/online/*"
+		    ],
+		    types: ["main_frame"]
+		},
+		["blocking"]
+	);
+}
+
+function setupErrorListener() {
+
 }
