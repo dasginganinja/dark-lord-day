@@ -38,4 +38,6 @@ if (state.performance_id != undefined && state.performance_id == config.performa
 	if (state.buymode) {
 		var reserved = setTickets();
 	}
-}		
+}
+
+removeAllTix();
