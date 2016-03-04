@@ -17,15 +17,7 @@ var methods = [
 
 ];
 
-function getQueryParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
+/* Getter/Setter Functions */
 
 function getExtensionURL(path) {
 	return chrome.extension.getURL(path);
@@ -35,13 +27,36 @@ function getPerformanceID() {
 	return state.performance_id;
 }
 
+function getPerformanceIDFromURL() {
+	//var expression = /(p\/|performance_id\=)([0-9]+)/g;
+	var expression = /\d+/;
+	var regex = new RegExp(expression);
+	var matches = window.location.href.match(regex);
+	if (matches) {
+		return matches[0];
+	}
+	return undefined;
+}
+
 function getPerformanceState() {
 	return state.performance_state;
 }
 
+function getDomain() {
+	return window.location.hostname;
+}
+function getDomainPresale() {
+	return 'event.etix.com';
+}
+function getDomainSale() {
+	return 'www.etix.com';
+}
+
+/* Common Routines */
+
 function dld_init() {
 	// Initialize performance_id
-	var paramid = getQueryParameterByName('performance_id');
+	var paramid = getPerformanceIDFromURL();
 	if (paramid) {
 		state.performance_id = paramid;
 	}
