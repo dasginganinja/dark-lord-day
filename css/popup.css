@@ -1,6 +1,14 @@
 body {
-	background: #00FF00;
+	background: #333;
+	color: #FFF;
 	width: 14em;
+}
+a {
+	color: #FFF;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: dashed;
 }
 
 .buymode--enabled {
