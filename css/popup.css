@@ -2,3 +2,14 @@ body {
 	background: #00FF00;
 	width: 14em;
 }
+
+.buymode--enabled {
+	color: green;
+	font-weight: 700;
+	text-decoration: dashed;
+}
+
+.buymode--disabled {
+	color: red;
+	font-size: smaller;
+}

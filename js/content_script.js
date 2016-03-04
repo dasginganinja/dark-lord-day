@@ -35,7 +35,7 @@ if (state.performance_id != undefined && state.performance_id == config.performa
 	// Jay-Z RestoreToken URL: http://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=6503389
 
 
-	if (state.armed) {
-		setTickets();
+	if (state.buymode) {
+		var reserved = setTickets();
 	}
 }		

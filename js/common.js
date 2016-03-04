@@ -4,7 +4,8 @@ var config = {
 var state = {
 	"performance_id": undefined,
 	"performance_state": undefined,
-	"checkout_step": undefined
+	"checkout_step": undefined,
+	"buymode": true
 };
 var checkout_steps = [
 	"presale",

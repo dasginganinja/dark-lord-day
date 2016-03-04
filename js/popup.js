@@ -1,0 +1,1 @@
+// http://stackoverflow.com/questions/17174093/how-do-i-toggle-on-off-content-scripts-in-a-google-extension
