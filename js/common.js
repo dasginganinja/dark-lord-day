@@ -40,11 +40,15 @@ function getPerformanceState() {
 }
 
 function dld_init() {
-	// Get ID from Query String
+	// Initialize performance_id
 	var paramid = getQueryParameterByName('performance_id');
 	if (paramid) {
 		state.performance_id = paramid;
 	}
+
+	// initialize method
+
+	// initialize state
 }
 
 function setTickets($form, num) {
