@@ -35,13 +35,24 @@ if (state.performance_id != undefined && state.performance_id == config.performa
 ///	// Cart URL: https://www.etix.com/ticket/online/performanceSale.do?method=viewShoppingCart
 ///	// Jadakiss URL: https://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=6503389&method=restoreToken
 
-
+/// // 3 floyds https://event.etix.com/ticket/p/7745932/dark-lord-day-munster-three-floyds-brewery
 
 	// Jay-Z RestoreToken URL: http://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=6503389
 
 
+	// Moody Blues Live URL
+	// https://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=2975795
+
+
 	if (state.buymode && state.checkout_step == 'sale') {
 		var reserved = setTickets();
+		if (!reserved) {
+			setupTimer();
+		}
+	}
+
+	if (state.buymode && state.checkout_step == 'presale') {
+		setupTimer();
 	}
 }
 

@@ -1,5 +1,5 @@
 var config = {
-	"performance_id_default": 6503389,//7745932,
+	"performance_id_default": 2975795,//7745932,
 	"sale_new_tabs": 5
 };
 var state = {
@@ -47,6 +47,12 @@ function getPerformanceIDFromMeta() {
 function getPerformanceState() {
 	return state.performance_state;
 }
+function getIsCart() {
+	var expression = /viewShoppingCart/;
+	var regex = new RegExp(expression);
+	var matches = window.location.href.match(regex);
+	return matches;
+}
 
 function getDomain() {
 	return window.location.hostname;
@@ -73,7 +79,11 @@ function dld_init() {
 	if (curDomain == getDomainPresale()) {
 		state.checkout_step = 'presale';
 	} else if (curDomain == getDomainSale()) {
-		state.checkout_step = 'sale';
+		if (getIsCart()) {
+			state.checkout_step = 'cart';
+		} else if (state.performance_id) {
+			state.checkout_step = 'sale';
+		}
 	}
 }
 
@@ -137,8 +147,9 @@ function getPresaleTicketUrl(performance_id) {
 	  + "performanceSale.do?method=restoreToken&performance_id=" 
 	  + performance_id;
 }
-
+console.log('1');
 function setupRequestListener() {
+console.log('onBeforeRedirect started');
 	chrome.webRequest.onBeforeRedirect.addListener(
 		function(details) {
 
@@ -162,12 +173,13 @@ function setupRequestListener() {
 		    ],
 		    types: ["main_frame"]
 		},
-		["blocking"]
+		["responseHeaders"]
 	);
+console.log('onBeforeRedirect ended');
 }
-
+console.log('2');
 function setupErrorListener() {
-
+console.log('onErrorOccurred started');
 	chrome.webRequest.onErrorOccurred.addListener(
 		function(details) {
 
@@ -179,34 +191,36 @@ function setupErrorListener() {
 
 			// details.timeStamp
 
-			chrome.tabs.update(
-				details.tabId, 
-				{
-					url: getSaleTicketUrl()
-				}
-			);
+			if (details.url.indexOf('etix.com/') != -1) {
+
+				chrome.tabs.update(
+					details.tabId, 
+					{
+						url: getSaleTicketUrl()
+					}
+				);
+			}
 
 			return {};
 		},
-		
-{		    urls: [
+		{		    
+			urls: [
 		        "*://www.etix.com/ticket/p/*",
 		        "*://event.etix.com/ticket/p/*",
 		        "*://www.etix.com/ticket/online/*",
 		        "*://event.etix.com/ticket/online/*"
-		    ],
-		    types: ["main_frame"]
-		},
-		["blocking"]
+		    ]
+		}
 	);
+console.log('onErrorOccurred ended');
 }
-
+console.log('3');
 function setupCartListener() {
 
 	// the cart listener will close out existing etix tabs when it detects the cart
 	//viewShoppingCart
 	// onResponseStarted
-
+console.log('onResponseStarted started');
 	chrome.webRequest.onResponseStarted.addListener(
 		function(details) {
 
@@ -223,13 +237,14 @@ function setupCartListener() {
 				{
 					"url": [
 						"*://event.etix.com/ticket/online/*", // all presale
+						"*://event.etix.com/ticket/p/*", // all presale
 						"*://www.etix.com/ticket/p/*", // all event pages on the main site
 						"*://www.etix.com/ticket/online/performanceSale.do?*method=restoreToken*" // all event pages on the main site
 					]
 				},
 				function (tabArr) {
 					for (var i = 0; tabArr[i]; i++) {
-						chrome.tabs.remove(tabArr[i].tabId);
+						chrome.tabs.remove(tabArr[i].id, function() {});
 					}
 				}
 			);
@@ -237,21 +252,29 @@ function setupCartListener() {
 		},
 		
 {		    urls: [
-		        "*://www.etix.com/ticket/online/performanceSale.do?*method=viewShoppingCart*"
+		        "*://www.etix.com/ticket/online/performanceSale.do?*method=viewShoppingCart*",
+				"*://event.etix.com/ticket/p/*", // all presale	
 		    ],
 		    types: ["main_frame"]
 		},
-		["blocking"]
+		["responseHeaders"]
 	);
+console.log('onResponseStarted ended');
 }
-
+console.log('4');
 function getCalculatedIntervalMS() {
-	return 300;
+	var timetoevent = calculateTimeToEventMS();
+	return timetoevent/10;
 }
 
 function setupTimer() {
 	var baseMinimum = 10 * 1000; //10s * 1000 = 10000ms
-	var calculatedInterval = getCalculatedInterval();
+	var calculatedInterval = getCalculatedIntervalMS();
+	var timetoevent = calculateTimeToEventMS();
+
+	if (calculatedInterval > timetoevent) {
+		timerCallback();
+	}
 
 
 
@@ -260,10 +283,16 @@ function setupTimer() {
 }
 
 function timerCallback() {
-	window.location = getSaleTicketUrl();
+	window.location = getSaleTicketUrl(state.performance_id);
 }
+console.log('5');
 
+function calculateTimeToEventMS() {
+	var now = new Date();
+	var event = new Date("March 5, 2016 12:00:00");
 
+	return event - now;
+}
 
 // General idea is to loop and refresh tabs
 // DONE: When the tabs load and there is an error it will refresh the tab
