@@ -1,5 +1,6 @@
 var config = {
-	"performance_id_default": 6503389//7745932
+	"performance_id_default": 6503389,//7745932,
+	"sale_new_tabs": 5
 };
 var state = {
 	"performance_id": undefined,
@@ -148,16 +149,13 @@ function setupRequestListener() {
 			// details.tabId
 
 			// details.timeStamp
-
-			return {
-				redirectUrl: host + details.url.match(/^https?:\/\/[^\/]+([\S\s]*)/)[1]
-			};
+			for (var i=0;i<config.sale_new_tabs;++i) {
+				openNewTab();
+			}
+			return {};
 		},
-		{
+		
 		    urls: [
-		        "*://www.etix.com/ticket/p/*",
-		        "*://event.etix.com/ticket/p/*",
-		        "*://www.etix.com/ticket/online/*"
 		        "*://event.etix.com/ticket/online/*"
 		    ],
 		    types: ["main_frame"]
@@ -205,7 +203,7 @@ function setupErrorListener() {
 
 // General idea is to loop and refresh tabs
 // DONE: When the tabs load and there is an error it will refresh the tab
-// When the tab detects that it is redirecting we should probably spawn 
+// DONE: When the tab detects that it is redirecting we should probably spawn 
 //    a few tabs or new windows with the sale page so that the
 //    automated ticket reservation can take over.
 // There should be a timer (window.setTimeout) that decreases its 
