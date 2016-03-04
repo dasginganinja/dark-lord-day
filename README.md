@@ -5,13 +5,13 @@ Currently this extension, once enabled and in buy mode, adds 2 tickets for the D
 
 ## Installation Instructions
 
-1.) Open Chrome.
-2.) [Download](https://github.com/dasginganinja/dark-lord-day/archive/master.zip) this extension.
-5.) Extract the ZIP file.
-2.) Open up Tools -> Extensions
-3.) Enable Developer Mode (checkbox in upper right hand)
-6.) Drag the dark-lord-days-master folder into the Extensions tab to install extension.
-7.) Extension is now installed.
+	1.) Open Chrome.
+	2.) [Download](https://github.com/dasginganinja/dark-lord-day/archive/master.zip) this extension.
+	5.) Extract the ZIP file.
+	2.) Open up Tools -> Extensions
+	3.) Enable Developer Mode (checkbox in upper right hand)
+	6.) Drag the dark-lord-days-master folder into the Extensions tab to install extension.
+	7.) Extension is now installed.
 
 * The extension must be in buy mode in order for this to work *
 
@@ -20,8 +20,8 @@ Currently this extension, once enabled and in buy mode, adds 2 tickets for the D
 
 ** The Extension is permanently in buy mode because of the time I had to develop this. Disable the extension if the event has passed. **
 
-1.) Click on the beer icon in your Chrome menu
-2.) Click on (DIS)ARM BUY MODE
+	1.) Click on the beer icon in your Chrome menu
+	2.) Click on (DIS)ARM BUY MODE
 
 There may be a banner on the event/cart/checkout pages which toggles the buy mode if I can get around to it.
 
