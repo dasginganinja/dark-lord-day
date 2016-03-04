@@ -138,7 +138,7 @@ function getPresaleTicketUrl(performance_id) {
 }
 
 function setupRequestListener() {
-	chrome.webRequest.onErrorOccurred.addListener(
+	chrome.webRequest.onBeforeRedirect.addListener(
 		function(details) {
 
 			// Error callback starts here
@@ -168,4 +168,48 @@ function setupRequestListener() {
 
 function setupErrorListener() {
 
+	chrome.webRequest.onErrorOccurred.addListener(
+		function(details) {
+
+			// Error callback starts here
+			
+			// details.url
+
+			// details.tabId
+
+			// details.timeStamp
+
+			chrome.tabs.update(
+				details.tabId, 
+				{
+					url: getSaleTicketUrl()
+				}
+			);
+
+			return {};
+		},
+		
+{		    urls: [
+		        "*://www.etix.com/ticket/p/*",
+		        "*://event.etix.com/ticket/p/*",
+		        "*://www.etix.com/ticket/online/*"
+		        "*://event.etix.com/ticket/online/*"
+		    ],
+		    types: ["main_frame"]
+		},
+		["blocking"]
+	);
 }
+
+
+
+// General idea is to loop and refresh tabs
+// When the tabs load and there is an error it will refresh the tab
+// When the tab detects that it is redirecting we should probably spawn 
+//    a few tabs or new windows with the sale page so that the
+//    automated ticket reservation can take over.
+// There should be a timer (window.setTimeout) that decreases its 
+//    checking interval as the time to the event gets closer.
+// If the time to the event for that tab is less than the interval, cut the interval in half.
+//    If it is still then too large halve it again.
+//    After five times just set the interval time to the difference between the event
