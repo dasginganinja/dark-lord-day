@@ -264,7 +264,9 @@ console.log('onResponseStarted ended');
 console.log('4');
 function getCalculatedIntervalMS() {
 	var timetoevent = calculateTimeToEventMS();
-	return timetoevent/10;
+	var calculatedtimetoevent = timetoevent/4;
+	console.log('time to event (ms): ' + timetoevent);
+	return calculatedtimetoevent;
 }
 
 function setupTimer() {
@@ -274,15 +276,18 @@ function setupTimer() {
 
 	if (calculatedInterval > timetoevent) {
 		timerCallback();
+		return;
 	}
 
 
 
 	var interval = Math.min(baseMinimum, calculatedInterval);
-	setTimeout(timerCallback, interval);
+	var boundedinterval = Math.max(interval, 500);
+	console.log('Refresh Interval (ms): ' + boundedinterval);
+	setTimeout(timerCallback, boundedinterval);
 }
 
-function timerCallback() {
+function timerCallback(force) {
 	window.location = getSaleTicketUrl(state.performance_id);
 }
 console.log('5');
