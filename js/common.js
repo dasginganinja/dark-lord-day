@@ -15,7 +15,7 @@ var checkout_steps = [
 var methods = [
 	"removeAllSeats",
 	"restoreToken", // takes a performance_id
-
+	"viewShoppingCart"
 ];
 
 var tab_interval = []; // Used to store the interval
@@ -133,7 +133,7 @@ function getSaleTicketUrl(performance_id) {
 }
 
 function getPresaleTicketUrl(performance_id) {
-	return "http://event.etix.com/ticket/online/performance_id=7745932&method=restoreToken
+	return "http://event.etix.com/ticket/online/performance_id=7745932&method=restoreToken"
 	  + "performanceSale.do?method=restoreToken&performance_id=" 
 	  + performance_id;
 }
@@ -149,12 +149,14 @@ function setupRequestListener() {
 			// details.tabId
 
 			// details.timeStamp
+
+			// Loop through and open a few tabs when we detect the event going live
 			for (var i=0;i<config.sale_new_tabs;++i) {
 				openNewTab();
 			}
 			return {};
 		},
-		
+		{
 		    urls: [
 		        "*://event.etix.com/ticket/online/*"
 		    ],
@@ -190,13 +192,75 @@ function setupErrorListener() {
 {		    urls: [
 		        "*://www.etix.com/ticket/p/*",
 		        "*://event.etix.com/ticket/p/*",
-		        "*://www.etix.com/ticket/online/*"
+		        "*://www.etix.com/ticket/online/*",
 		        "*://event.etix.com/ticket/online/*"
 		    ],
 		    types: ["main_frame"]
 		},
 		["blocking"]
 	);
+}
+
+function setupCartListener() {
+
+	// the cart listener will close out existing etix tabs when it detects the cart
+	//viewShoppingCart
+	// onResponseStarted
+
+	chrome.webRequest.onResponseStarted.addListener(
+		function(details) {
+
+			// Error callback starts here
+			
+			// details.url
+
+			// details.tabId
+
+			// details.timeStamp
+
+			// Close out the other active etix tabs
+			chrome.tabs.query(
+				{
+					"url": [
+						"*://event.etix.com/ticket/online/*", // all presale
+						"*://www.etix.com/ticket/p/*", // all event pages on the main site
+						"*://www.etix.com/ticket/online/performanceSale.do?*method=restoreToken*" // all event pages on the main site
+					]
+				},
+				function (tabArr) {
+					for (var i = 0; tabArr[i]; i++) {
+						chrome.tabs.remove(tabArr[i].tabId);
+					}
+				}
+			);
+			return {};
+		},
+		
+{		    urls: [
+		        "*://www.etix.com/ticket/online/performanceSale.do?*method=viewShoppingCart*"
+		    ],
+		    types: ["main_frame"]
+		},
+		["blocking"]
+	);
+}
+
+function getCalculatedIntervalMS() {
+	return 300;
+}
+
+function setupTimer() {
+	var baseMinimum = 10 * 1000; //10s * 1000 = 10000ms
+	var calculatedInterval = getCalculatedInterval();
+
+
+
+	var interval = Math.min(baseMinimum, calculatedInterval);
+	setTimeout(timerCallback, interval);
+}
+
+function timerCallback() {
+	window.location = getSaleTicketUrl();
 }
 
 

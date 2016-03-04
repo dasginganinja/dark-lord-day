@@ -32,6 +32,10 @@ if (state.performance_id != undefined && state.performance_id == config.performa
 	// Presale URL: http://event.etix.com/ticket/online/performanceSale.do?performance_id=7745932&method=restoreToken
 	// Live URL: www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=4894601
 	
+///	// Cart URL: https://www.etix.com/ticket/online/performanceSale.do?method=viewShoppingCart
+///	// Jadakiss URL: https://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=6503389&method=restoreToken
+
+
 
 	// Jay-Z RestoreToken URL: http://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=6503389
 

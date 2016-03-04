@@ -24,6 +24,8 @@
     ],
     "background": {
     	"scripts": [
+            "js/jquery.min.js",
+            "js/common.js",
     		"js/background.js"
 		],
         "persistent": true
