@@ -19,15 +19,15 @@ var methods = [
 
 /* Getter/Setter Functions */
 
-function getExtensionURL(path) {
+function getExtensionUrl(path) {
 	return chrome.extension.getURL(path);
 }
 
-function getPerformanceID() {
+function getPerformanceId() {
 	return state.performance_id;
 }
 
-function getPerformanceIDFromURL() {
+function getPerformanceIDFromUrl() {
 	//var expression = /(p\/|performance_id\=)([0-9]+)/g;
 	var expression = /\d+/;
 	var regex = new RegExp(expression);
@@ -36,6 +36,9 @@ function getPerformanceIDFromURL() {
 		return matches[0];
 	}
 	return undefined;
+}
+function getPerformanceIDFromMeta() {
+	//alert('danger will robinson');
 }
 
 function getPerformanceState() {
@@ -56,14 +59,19 @@ function getDomainSale() {
 
 function dld_init() {
 	// Initialize performance_id
-	var paramid = getPerformanceIDFromURL();
+	var paramid = getPerformanceIDFromUrl();
+//	var paramid = getPerformanceIDFromMeta();
 	if (paramid) {
 		state.performance_id = paramid;
 	}
 
-	// initialize method
-
-	// initialize state
+	// initialize step
+	var curDomain = getDomain();
+	if (curDomain == getDomainPresale()) {
+		state.checkout_step = 'presale';
+	} else if (curDomain == getDomainSale()) {
+		state.checkout_step = 'sale';
+	}
 }
 
 function setTickets($form, num) {
@@ -109,4 +117,20 @@ function clearShoppingCart() {
 	  <input type="hidden" name="target" value="null">
 	</form>
 	*/
+}
+
+function openNewTab(url) {
+	chrome.tabs.create({ "url": url });
+}
+
+function getSaleTicketUrl(performance_id) {
+	return "http://www.etix.com/ticket/online/"
+	  + "performanceSale.do?method=restoreToken&performance_id=" 
+	  + performance_id;
+}
+
+function getPresaleTicketUrl(performance_id) {
+	return "http://event.etix.com/ticket/online/performance_id=7745932&method=restoreToken
+	  + "performanceSale.do?method=restoreToken&performance_id=" 
+	  + performance_id;
 }

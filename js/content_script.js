@@ -3,7 +3,7 @@ dld_init();
 
 function dld_bg() {
 	// Set the background
-	var bgurl = getExtensionURL('images/bg_darklord.jpg');
+	var bgurl = getExtensionUrl('images/bg_darklord.jpg');
 	var bgval = "url('" + bgurl + "')";
 	$(document).ready(function () {
 		document.body.style.backgroundImage = bgval;
@@ -24,6 +24,7 @@ if (state.performance_id != undefined && state.performance_id == config.performa
 	// Enhanced Page Style
 	dld_bg();
 
+	// Dark Lord Days: 7745932
 	// Moody blues: 2975795
 	// Jay-Z: 6503389
 
@@ -35,7 +36,7 @@ if (state.performance_id != undefined && state.performance_id == config.performa
 	// Jay-Z RestoreToken URL: http://www.etix.com/ticket/online/performanceSale.do?method=restoreToken&performance_id=6503389
 
 
-	if (state.buymode) {
+	if (state.buymode && state.checkout_step == 'sale') {
 		var reserved = setTickets();
 	}
 }
