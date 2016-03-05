@@ -48,6 +48,7 @@
     ],
     "web_accessible_resources": [
         "images/*.png",
-        "images/*.jpg"
+        "images/*.jpg",
+        "js/*.js"
     ]
 }

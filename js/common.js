@@ -96,6 +96,11 @@ function setTickets($form, num) {
 		num = 2;
 	}
 
+	// Check to see we have a form to begin with
+	if ($form == undefined || $form.length == 0) {
+		return 0;
+	}
+
 	// Get the first ticket dropdown
 	$element = $form.find('.price-level-row:first-child select');
 
@@ -139,7 +144,8 @@ function openNewTab(url) {
 function getSaleTicketUrl(performance_id) {
 	return "http://www.etix.com/ticket/online/"
 	  + "performanceSale.do?method=restoreToken&performance_id=" 
-	  + performance_id;
+	  + performance_id
+	  + "&selection_method=byBest";
 }
 
 function getPresaleTicketUrl(performance_id) {
@@ -295,7 +301,7 @@ console.log('5');
 function calculateTimeToEventMS() {
 	var now = new Date();
 	var event = new Date("March 5, 2016 13:00:00"); // Dark Lord Days
-	
+
 	return event - now;
 }
 
