@@ -16,6 +16,12 @@ Currently this extension, once enabled and in buy mode, adds 2 tickets for the D
 9. Finish your reservation
 10. Good luck :)
 
+## Important Notes
+* Your computer must have it's date and time set to the eastern time zone as I don't take timezones into account with this solution and I have a hard-coded date/time.
+* It's probably a good idea to sync your computer with the time servers. Look up NTP sync ****your operating system**** for how to do so. This will synchronize your computer's clock with a national source.
+* You should probably only *start this 15 or less minutes before the event goes live*
+* The event time listed is CST. Look at the countdown timer to be on the safe side.
+
 
 ## (Dis)arming Buy Mode
 
