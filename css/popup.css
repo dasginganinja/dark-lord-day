@@ -22,3 +22,15 @@ a:hover {
 	color: red;
 	font-size: smaller;
 }
+h4 a {
+	line-height: 1.3em;
+	padding: 15px;
+	border-radius: 15px;
+	background: #FBB117;
+	font-size: 16px;
+	text-align: center;
+	display: block;
+}
+h4 a:hover {
+	background: #FB6617;
+}

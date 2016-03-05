@@ -112,6 +112,16 @@ function setTickets($form, num) {
 	// Set the number of tickets
 	$element.val(num);
 
+	// If we have a captcha we can't go any further
+	// So say that we reserved them and let the user
+	// put in the captcha. Once they reserve tickets the other
+	// pages get closed out and only the cart stays
+	if (jQuery('#recaptcha_table').length) {
+		// user must put in captcha
+		console.log('Awaiting captcha input');
+		return 1;
+	}
+
 	// Submit the form
 	$form.find('button[type="submit"]').trigger('click');
 	
@@ -149,13 +159,13 @@ function getSaleTicketUrl(performance_id) {
 }
 
 function getPresaleTicketUrl(performance_id) {
-	return "http://event.etix.com/ticket/online/performance_id=7745932&method=restoreToken"
+	return "http://event.etix.com/ticket/online/"
 	  + "performanceSale.do?method=restoreToken&performance_id=" 
-	  + performance_id;
+	  + performance_id
+	  + "&selection_method=byBest";
 }
-console.log('1');
+
 function setupRequestListener() {
-console.log('onBeforeRedirect started');
 	chrome.webRequest.onBeforeRedirect.addListener(
 		function(details) {
 
@@ -181,11 +191,9 @@ console.log('onBeforeRedirect started');
 		},
 		["responseHeaders"]
 	);
-console.log('onBeforeRedirect ended');
 }
-console.log('2');
+
 function setupErrorListener() {
-console.log('onErrorOccurred started');
 	chrome.webRequest.onErrorOccurred.addListener(
 		function(details) {
 
@@ -202,7 +210,7 @@ console.log('onErrorOccurred started');
 				chrome.tabs.update(
 					details.tabId, 
 					{
-						url: getSaleTicketUrl()
+						url: getPresaleTicketUrl(config.performance_id_default)
 					}
 				);
 			}
@@ -218,15 +226,13 @@ console.log('onErrorOccurred started');
 		    ]
 		}
 	);
-console.log('onErrorOccurred ended');
 }
-console.log('3');
+
 function setupCartListener() {
 
 	// the cart listener will close out existing etix tabs when it detects the cart
 	//viewShoppingCart
 	// onResponseStarted
-console.log('onResponseStarted started');
 	chrome.webRequest.onResponseStarted.addListener(
 		function(details) {
 
@@ -265,9 +271,8 @@ console.log('onResponseStarted started');
 		},
 		["responseHeaders"]
 	);
-console.log('onResponseStarted ended');
 }
-console.log('4');
+
 function getCalculatedIntervalMS() {
 	var timetoevent = calculateTimeToEventMS();
 	var calculatedtimetoevent = timetoevent/4;
@@ -294,9 +299,8 @@ function setupTimer() {
 }
 
 function timerCallback(force) {
-	window.location = getSaleTicketUrl(state.performance_id);
+	window.location = getPresaleTicketUrl(state.performance_id);
 }
-console.log('5');
 
 function calculateTimeToEventMS() {
 	var now = new Date();
@@ -310,8 +314,8 @@ function calculateTimeToEventMS() {
 // DONE: When the tab detects that it is redirecting we should probably spawn 
 //    a few tabs or new windows with the sale page so that the
 //    automated ticket reservation can take over.
-// There should be a timer (window.setTimeout) that decreases its 
+// DONE: There should be a timer (window.setTimeout) that decreases its 
 //    checking interval as the time to the event gets closer.
-// If the time to the event for that tab is less than the interval, cut the interval in half.
+// DONEISH: If the time to the event for that tab is less than the interval, cut the interval in half.
 //    If it is still then too large halve it again.
 //    After five times just set the interval time to the difference between the event

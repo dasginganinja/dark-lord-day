@@ -1,3 +1,11 @@
+// Links don't load unless you specify their click action.
+// Create a new tab.
+window.addEventListener('click',function(e){
+  if(e.target.href!==undefined){
+    chrome.tabs.create({url:e.target.href})
+  }
+})
+
 jQuery(document).ready(function() {
 	// var eventurl = document.getElementById('eventurl');
 	var presaleurl = getPresaleTicketUrl(config.performance_id_default); 
