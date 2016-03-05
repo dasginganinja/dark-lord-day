@@ -1,5 +1,5 @@
 # Dark Lord Day
-## A Chrome Extension for getting some damn tickets to Dark Lord Days
+## A Chrome Extension for getting some damn beers at Dark Lord Day
 
 Currently this extension, once enabled and in buy mode, adds 2 tickets for the Dark Lord Day event. This is just a proof of concept and comes with no guarantee that it will work.
 
