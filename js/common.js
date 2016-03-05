@@ -179,7 +179,7 @@ function setupRequestListener() {
 
 			// Loop through and open a few tabs when we detect the event going live
 			for (var i=0;i<config.sale_new_tabs;++i) {
-				openNewTab();
+				openNewTab(getSaleTicketUrl(config.performance_id_default));
 			}
 			return {};
 		},
@@ -210,7 +210,7 @@ function setupErrorListener() {
 				chrome.tabs.update(
 					details.tabId, 
 					{
-						url: getPresaleTicketUrl(config.performance_id_default)
+						url: details.url
 					}
 				);
 			}
