@@ -1,7 +1,7 @@
 # Dark Lord Day
 ## A Chrome Extension for getting some damn tickets to Dark Lord Days
 
-Currently this extension, once enabled and in buy mode, adds 2 tickets for the Dark Lord Days event. This is just a proof of concept and comes with no guarantee that it will work.
+Currently this extension, once enabled and in buy mode, adds 2 tickets for the Dark Lord Day event. This is just a proof of concept and comes with no guarantee that it will work.
 
 ## Installation Instructions
 
@@ -10,7 +10,7 @@ Currently this extension, once enabled and in buy mode, adds 2 tickets for the D
 3. Extract the ZIP file.
 4. Open up Tools -> Extensions
 5. Enable Developer Mode (checkbox in upper right hand)
-6. Click on the "load packed extension..." button and navigate to the dark-lord-days-master folder. Click on it and select open.
+6. Click on the "load packed extension..." button and navigate to the dark-lord-day-master folder. Click on it and select open.
 7. Extension is now installed.
 8. Navigate to the presale ticket page and watch it refresh. When it comes time for the event you'll notice tabs pop open and when one successfully goes to the cart the other tabs will close.
 9. Finish your reservation
