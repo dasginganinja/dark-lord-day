@@ -28,3 +28,7 @@ Please don't rely on this tool to get the tickets. Use a second computer (or Fir
 ## Liability
 
 I'm not liable for anything that you may do with this extension, including usage and modification.  Use at your own risk.
+
+## Contribution
+
+If you feel like making this better please go ahead and do so.  Pull requests are welcomed.
