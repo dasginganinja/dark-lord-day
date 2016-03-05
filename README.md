@@ -1,7 +1,7 @@
 # Dark Lord Day
 ## A Chrome Extension for getting some damn tickets to Dark Lord Days
 
-Currently this extension, once enabled and in buy mode, adds 2 tickets for the Dark Lord Days event. This is just a proof of concept and comes with no guarantee that it will work. You are liable for anything that you do with this extension.
+Currently this extension, once enabled and in buy mode, adds 2 tickets for the Dark Lord Days event. This is just a proof of concept and comes with no guarantee that it will work.
 
 ## Installation Instructions
 
@@ -24,3 +24,7 @@ Currently this extension, once enabled and in buy mode, adds 2 tickets for the D
 ## Final Note
 
 Please don't rely on this tool to get the tickets. Use a second computer (or Firefox) and to try and get the tickets. If this reserves your tickets then I'm happy for you and please let me know @dasginganinja on Twitter.  Thanks!
+
+## Liability
+
+I'm not liable for anything that you may do with this extension, including usage and modification.  Use at your own risk.
