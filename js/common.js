@@ -1,5 +1,5 @@
 var config = {
-	"performance_id_default": 2975795,//7745932,
+	"performance_id_default": 7745932,
 	"sale_new_tabs": 5
 };
 var state = {
@@ -294,10 +294,8 @@ console.log('5');
 
 function calculateTimeToEventMS() {
 	var now = new Date();
-	//var event = new Date("March 5, 2016 13:00:00"); // Dark Lord Days
-	var event = new Date("March 4, 2016 12:00:00");
-
-
+	var event = new Date("March 5, 2016 13:00:00"); // Dark Lord Days
+	
 	return event - now;
 }
 
